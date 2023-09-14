@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.thymeleaf.org" th:replace="~{/admin/layouts/layout :: dynamic(~{::body})}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1 class="h3 mb-2 text-gray-800">Users</h1>
+
+    <div class="card shadow mb 4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">DataTables User</h6>
+        </div>
+        <div class="card-body">
+            <form action="/movies/admin/accounts/save" method="POST" th:object="${account}">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group mb-3">
+                            <div class="d-flex justify-content-between">
+                                <label for="id" class="form-label">Username</label>
+                                <i th:errors="*{id}" class="justify-content-end text-danger"></i>
+                            </div>
+                            <input th:field="*{id}" type="text" class="form-control form-control-user"
+                                placeholder="Enter Username..." th:readonly="${update}" />
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group mb-3">
+                            <div class="d-flex justify-content-between">
+                                <label for="name" class="form-label">Fullname</label>
+                                <i th:errors="*{name}" class="justify-content-end text-danger"></i>
+                            </div>
+                            <input th:field="*{name}" type="text" class="form-control form-control-user"
+                                placeholder="Enter Fullname...">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group mb-3">
+                            <div class="d-flex justify-content-between">
+                                <label for="phone" class="form-label">Phone number</label>
+                                <i th:errors="*{phone}" class="justify-content-end text-danger"></i>
+                            </div>
+                            <input th:field="*{phone}" type="text" class="form-control form-control-user"
+                                placeholder="Enter Phone number...">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group mb-3">
+                            <div class="d-flex justify-content-between">
+                                <label for="age" class="form-label">Age</label>
+                                <i th:errors="*{age}" class="justify-content-end text-danger"></i>
+                            </div>
+                            <input th:field="*{age}" type="number" class="form-control form-control-user"
+                                placeholder="Enter Age User...">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group mb-3">
+                            <div class="d-flex justify-content-between">
+                                <label for="password" class="form-label">Password</label>
+                                <i th:errors="*{password}" class="justify-content-end text-danger"></i>
+                            </div>
+                            <input th:field="*{password}" type="text" class="form-control form-control-user"
+                                placeholder="Enter Password...">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group mb-3">
+                            <div class="d-flex justify-content-between">
+                                <label for="email" class="form-label">Email</label>
+                                <i th:errors="*{email}" class="justify-content-end text-danger"></i>
+                            </div>
+                            <input th:field="*{email}" type="email" class="form-control form-control-user"
+                                placeholder="Enter email...">
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn btn-success btn-user">
+                    Save
+                </button>
+                <a th:href="@{|/movies/admin/accounts/delete/*{id}|}" class="btn btn-danger btn-account"
+                    id="deleteButton">
+                    Delete
+                </a>
+                <a th:href="@{|/movies/admin/accounts/edit|}" class="btn btn-secondary btn-user">
+                    Clear
+                </a>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("deleteButton").addEventListener("click", function (e) {
+            var confirmed = confirm("Are you sure you want to delete?");
+            if (!confirmed) {
+                e.preventDefault();
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,115 @@
+<nav class="navbar navbar-expand-lg fixed-top navbar-transparent" color-on-scroll="100">
+    <div class="container">
+        <div class="navbar-translate">
+            <a class="navbar-brand" href="/home" rel="tooltip" title="Designed by MovieTeam" data-placement="bottom">
+                <span>MovieMark</span> MTeam
+            </a>
+            <button class="navbar-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
+                aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-bar bar1"></span>
+                <span class="navbar-toggler-bar bar2"></span>
+                <span class="navbar-toggler-bar bar3"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse justify-content-end" id="navigation">
+            <div class="navbar-collapse-header">
+                <div class="row">
+                    <div class="col-6 collapse-brand">
+                        <a>
+                            MovieMark
+                        </a>
+                    </div>
+                    <div class="col-6 collapse-close text-right">
+                        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navigation"
+                            aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                            <i class="tim-icons icon-simple-remove"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <ul class="navbar-nav">
+                <li class="dropdown nav-item">
+                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                        <i class="fa fa-cogs d-lg-none d-xl-none"></i> Tài khoản
+                    </a>
+                    <div class="dropdown-menu dropdown-with-icons">
+                        <a sec:authorize="!isAuthenticated()" th:href="@{/user/login}" class="dropdown-item">
+                            <i class="tim-icons icon-paper"></i> Đăng nhập
+                        </a>
+                        <a sec:authorize="!isAuthenticated()" th:href="@{/user/register}" class="dropdown-item">
+                            <i class="tim-icons icon-bullet-list-67"></i> Đăng kí
+                        </a>
+                        <a sec:authorize="isAuthenticated()" th:href="@{/user/history}" class="dropdown-item">
+                            <i class="tim-icons icon-image-02"></i> History
+                        </a>
+
+                        <a sec:authorize="isAuthenticated()" th:href="@{/user/information}" class="dropdown-item">
+                            <i class="tim-icons icon-image-02"></i> Profile
+                        </a>
+                        <a sec:authorize="isAuthenticated() && hasRole('admin')" th:href="@{/movies/admin}"
+                            class="dropdown-item">
+                            <i class="tim-icons icon-image-02"></i> Change Admin
+                        </a>
+                        <a sec:authorize="isAuthenticated()" th:href="@{/user/logout}" class="dropdown-item">
+                            <i class="tim-icons icon-single-02"></i> Đăng xuất
+                        </a>
+                    </div>
+                </li>
+                <li class="dropdown nav-item">
+                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                        <i class="fa fa-cogs d-lg-none d-xl-none"></i> Thể loại
+                    </a>
+                    <div class="dropdown-menu dropdown-with-icons">
+                        <a th:each="category : ${categorysMovie}" th:href="@{|/movie/search/category/${category}|}"
+                            class="dropdown-item">
+                            <i class="tim-icons icon-paper"></i> <span>[[${category}]]</span>
+                        </a>
+                    </div>
+                </li>
+                <li class="dropdown nav-item">
+                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                        <i class="fa fa-cogs d-lg-none d-xl-none"></i> Năm
+                    </a>
+                    <div class="dropdown-menu dropdown-with-icons">
+                        <a href="#" class="dropdown-item" th:each="year : ${yearsMovie}">
+                            <i class="tim-icons icon-image-02"></i> <span>[[${year}]]</span>
+                        </a>
+                    </div>
+                </li>
+                <li class="dropdown nav-item">
+                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                        <i class="fa fa-cogs d-lg-none d-xl-none"></i> Rạp
+                    </a>
+                    <div class="dropdown-menu dropdown-with-icons">
+                        <a class="dropdown-item" th:each="movieTheater : ${movieTheaters}"
+                            th:href="@{|/movie/search/theater/${movieTheater}|}">
+                            <i class="tim-icons icon-image-02"></i> <span>[[${movieTheater}]]</span>
+                        </a>
+                    </div>
+                </li>
+                <li class="nav-item p-0">
+                    <a class="nav-link" rel="tooltip" title="Follow us on Twitter" data-placement="bottom" href="#"
+                        target="_blank">
+                        <i class="fab fa-twitter"></i>
+                        <p class="d-lg-none d-xl-none">Twitter</p>
+                    </a>
+                </li>
+                <li class="nav-item p-0">
+                    <a class="nav-link" rel="tooltip" title="Like us on Facebook" data-placement="bottom" href="#"
+                        target="_blank">
+                        <i class="fab fa-facebook-square"></i>
+                        <p class="d-lg-none d-xl-none">Facebook</p>
+                    </a>
+                </li>
+                <li class="nav-item p-0">
+                    <a class="nav-link" rel="tooltip" title="Follow us on Instagram" data-placement="bottom" href="#"
+                        target="_blank">
+                        <i class="fab fa-instagram"></i>
+                        <p class="d-lg-none d-xl-none">Instagram</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

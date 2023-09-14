@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="/assets/img/favicon.png">
+    <title>
+        MovieMark
+    </title>
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet" />
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <!-- Nucleo Icons -->
+    <link href="/assets/css/nucleo-icons.css" rel="stylesheet" />
+    <!-- CSS Link -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+    integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous"> -->
+    <!-- CSS Files -->
+    <link href="/assets/css/blk-design-system.css?v=1.0.0" rel="stylesheet" />
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link href="/assets/demo/demo.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        .click.ng-invalid {}
+
+        .click {
+            background-color: green;
+            color: white;
+        }
+
+        .green {
+            background-color: green;
+        }
+    </style>
+</head>
+
+<body class="index-page" ng-app="app" ng-controller="ctrl">
+    <!-- Start Navbar -->
+    <div th:replace="~{/users/element/_navheader::nav}"></div>
+    <!-- End Navbar -->
+
+    <!-- Start BodyIndex -->
+    <div class="wrapper">
+        <div style="height: 5rem;"></div>
+        <!-- Main Content -->
+        <div class="container py-3">
+            <div class="row">
+                <div class="col">
+                    <!-- Phim chi tiết -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class=" panel-title mb-0" th:text="${movieDetail.get().name}"
+                                th:attr="idMovie=${movieDetail.get().id}"></h3>
+                            <div class="dropdown-divider"></div>
+                            <hr>
+                        </div>
+                        <div class="panel-body row">
+                            <div class="col-md-4">
+                                <img th:src="${movieDetail.get().poster}" alt="">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="panel-body col">
+                                    <div>
+                                        <h4 class="my-2">Chọn rạp</h4>
+                                        <div class="btn-group" role="group" ng-repeat="movieT in movieTheater">
+                                            <button ng-style="{'background-color': changeColor}"
+                                                class="btn btn-outline-primary mx-2" ng-click="showDay(movieT[0])">
+                                                {{ movieT[1] }}
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <h4 class="my-2">Chọn Ngày</h4>
+                                        <div class="btn-group" role="group" ng-repeat="date in dateOfMovie">
+                                            <button ng-style="{'background-color': changeColor}"
+                                                class="btn btn-outline-primary mx-2" ng-click="showTime(date)">
+                                                {{ date }}</button>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <h4 class="my-2">Chọn khung giờ </h4>
+                                        <div class="btn-group" role="group" ng-repeat="time in timeOfMovie">
+                                            <button ng-style="{'background-color': changeColor}"
+                                                class="btn btn-outline-primary mx-2" ng-click="listChair(time)">
+                                                {{ time }}
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <h4 class="my-2">Chọn số ghế </h4>
+                                        <div ng-repeat="x in [].constructor(30) track by $index"
+                                            ng-click="chooseSeat($index + 1)" ng-disabled="isSeatTaken($index + 1)"
+                                            ng-class="!isSeatSelected($index + 1) ? 'btn btn-primary' : 'btn btn-warning' "
+                                            style="font-family: 'Inconsolata', monospace;">
+                                            {{ ($index + 1 < 10 ? '0' : '' ) + ($index + 1) }} </div>
+                                                <a ng-click="sendData()" class="btn btn-success">Thanh toán</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Phim chi tiết -->
+
+                                <!-- Description-->
+                                <div class="panel panel-default mt-3">
+                                    <div class="panel-heading">
+                                        <h3 class=" panel-title mb-0"> Description </h3>
+                                        <div class="dropdown-divider"></div>
+                                        <hr>
+                                    </div>
+                                    <div class="panel-body col">
+                                        <h4 th:text="${movieDetail.get().description}"></h4>
+                                        <div ng-show="false" id="idMovie" th:text="${movieDetail.get().id}"></div>
+
+                                    </div>
+                                </div>
+                                <!-- Hiện ghế -->
+
+                                <div th:replace="~{/users/element/_movieHot::.panel}"></div>
+                                <!-- Phim Hot -->
+
+                                <!-- Phim vừa cập nhật -->
+                                <div th:replace="~{/users/element/_movieJustUpdate::.panel}"></div>
+                                <!-- Phim vừa cập nhật -->
+
+                                <!-- Tin tức -->
+                                <div th:replace="~{/users/element/_news::.panel}"></div>
+                                <!-- Tin tức -->
+
+                            </div>
+                            <!-- Bảng xếp hạng -->
+                            <!-- <div class="col-md-3">
+                    <div th:replace="~{/users/element/_movieRank::.panel}"></div>
+                </div> -->
+                            <!-- Bảng xếp hạng -->
+                        </div>
+                        <!-- End Main Content -->
+                    </div>
+                    <!-- End BodyIndex -->
+                </div>
+
+                <!-- Start Footer -->
+                <div th:replace="~{/users/element/_footer::footer}"></div>
+                <!-- End Footer -->
+</body>
+<!--   Core JS Link   -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"
+    integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+"
+    crossorigin="anonymous"></script>
+<script src="./assets/js/plugins/perfect-scrollbar.jquery.min.js"></script> -->
+<!--   Core JS Files   -->
+<script src="/assets/js/core/jquery.min.js" type="text/javascript"></script>
+<script src="/assets/js/core/popper.min.js" type="text/javascript"></script>
+<script src="/assets/js/core/bootstrap.min.js" type="text/javascript"></script>
+<script src="/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+<!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
+<script src="/assets/js/plugins/bootstrap-switch.js"></script>
+<!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+<script src="/assets/js/plugins/nouislider.min.js" type="text/javascript"></script>
+<!-- Chart JS -->
+<script src="/assets/js/plugins/chartjs.min.js"></script>
+<!--  Plugin for the DatePicker, full documentation here: https://github.com/uxsolutions/bootstrap-datepicker -->
+<script src="/assets/js/plugins/moment.min.js"></script>
+<script src="/assets/js/plugins/bootstrap-datetimepicker.js" type="text/javascript"></script>
+<!-- Black Dashboard DEMO methods, don't include it in your project! -->
+<script src="/assets/demo/demo.js"></script>
+<!-- Control Center for Black UI Kit: parallax effects, scripts for the example pages etc -->
+<script src="/assets/js/blk-design-system.min.js?v=1.0.0" type="text/javascript"></script>
+<script>
+    $(document).ready(function () {
+        blackKit.initDatePicker();
+        blackKit.initSliders();
+    });
+</script>
+<!-- Control JS -->
+<script>
+    var loadChair = [];
+    for (var i = 1; i <= 30; i++) {
+        loadChair.push(i.toString().padStart(2, '0'));
+    }
+    var movieTheaterId = "theater1";
+    var MovieId = "movie1";
+    const app = angular.module("app", []);
+    app.controller("ctrl", function ($scope, $http) {
+        $scope.showPay = true;
+        $scope.movieTheaterId = undefined;
+        $scope.movieTheater = [];
+        $scope.dateOfMovie = undefined;
+        $scope.dayMovie = undefined;
+        $scope.timeOfMovie = undefined;
+        $scope.seats = [];
+        $scope.seatBooked = [];
+        $scope.time = undefined;
+
+        var urlChair = `http://localhost:8080/rest/movieplay`;
+        var urlMovietheater = "http://localhost:8080/rest/movie";
+        var urlTemp = "http://localhost:8080/rest";
+        var idMovie = document.getElementById('idMovie').innerText;
+        $scope.isSeatTaken = function (seatNumber) {
+            return loadChair.includes(seatNumber); // Kiểm tra xem ghế đã có trong danh sách đã đặt
+        };
+        $scope.listChair = function (timeMovie) {
+            let url = `${urlMovietheater}/chart/${movieTheaterId}/${idMovie}/${$scope.dayMovie}/${timeMovie}`;
+            $scope.time = timeMovie;
+            console.log(url);
+            $http.get(url).then(resp => {
+                loadChair = resp.data;
+            }).catch(error => {
+                console.log("Error", error);
+            })
+            $scope.color();
+            $scope.getIdMovieplay(timeMovie);
+        }
+
+        $scope.listMovieTheaters = function () {
+            let url = `${urlMovietheater}/movietheater/${idMovie}`;
+            $http.get(url).then(resp => {
+                $scope.movieTheater = resp.data;
+                $scope.timeOfMovie = null;
+                console.log($scope.movieTheater);
+            }).catch(error => {
+                console.log(error);
+            })
+        }
+
+        $scope.showDay = function (idMovieTheater) {
+            let url = `${urlMovietheater}/date/${idMovieTheater}/${idMovie}`;
+            $http.get(url).then(resp => {
+                $scope.dateOfMovie = resp.data;
+                $scope.movieTheaterId = idMovieTheater;
+            }).catch(error => {
+                console.log(error);
+            })
+            $scope.color();
+        }
+
+        $scope.showTime = function (day) {
+            let url = `${urlMovietheater}/time/${movieTheaterId}/${idMovie}/${day}`;
+            $http.get(url).then(resp => {
+                $scope.timeOfMovie = resp.data;
+                $scope.dayMovie = day;
+            }).catch(error => {
+                console.error(error);
+            })
+            $scope.color();
+        }
+
+        $scope.isSeatSelected = function (seatNumber) {
+            return $scope.seats.includes(seatNumber);
+        };
+        $scope.chooseSeat = function (seat) {
+            if (!$scope.movieTheaterId) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Xảy ra lỗi',
+                    text: 'Bạn chưa chọn rạp'
+                })
+                return;
+            } else if (!$scope.dayMovie) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Xảy ra lỗi',
+                    text: 'Bạn chưa chọn ngày'
+                })
+                return;
+            } else if (!$scope.time) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Xảy ra lỗi',
+                    text: 'Bạn chưa chọn thời gian'
+                })
+                return;
+            } else {
+                const seatIndex = $scope.seats.indexOf(seat);
+                if (seatIndex === -1) {
+                    $scope.seats.push(seat);
+                } else {
+                    $scope.seats.splice(seatIndex, 1);
+                }
+                console.log($scope.seat);
+
+            }
+        }
+
+        $scope.isItemDisabled = function (item) {
+            return $scope.array2.indexOf(item) !== -1;
+        }
+
+        // $scope.seatBooked = function (id) {
+        //     let url = `${url}/${movieTheaterId}/${idMovie}/${dateOfMovie}/${id}`;
+        //     console.log(url);
+        //     $http.get(url).then(resp => {
+        //         $scope.seatsBooked = resp.data;
+        //         console.log($scope.seatsBooked);
+        //     }).catch(error => {
+        //         console.log(error);
+        //     })
+        // }
+
+        $scope.getIdMovieplay = function (time) {
+            let getMovieplay = `${urlTemp}/movieplay/${idMovie}/${movieTheaterId}/${$scope.dayMovie}/${time}`;
+            $http.get(getMovieplay).then(resp => {
+                $scope.idMoviePlay = resp.data;
+            }).catch(error => {
+                console.log(error);
+            })
+        }
+
+        // Hậu ơi - Oke
+
+        $scope.color = function () {
+            $scope.changeColor = "green";
+        }
+
+        $scope.sendData = function () {
+            if (!$scope.seats || !$scope.movieTheaterId || !$scope.idMoviePlay) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Không thể thanh toán',
+                    text: 'Hãy thực hiện thanh toán do bạn chưa cung cấp đủ thông tin'
+                })
+                return;
+            } else if ($scope.seats.length == 0) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Không thể thanh toán',
+                    text: 'Bạn chưa chọn ghế'
+                })
+                return;
+            }
+            $scope.data = {
+                seats: $scope.seats,
+                theaterId: $scope.movieTheaterId,
+                moviePlayId: $scope.idMoviePlay
+            };
+            const seatsString = $scope.data.seats.join(',');
+            const url = `/vnpay_jsp/vnpay_payment?seats=${seatsString}&theaterId=${$scope.movieTheaterId}&moviePlayId=${$scope.idMoviePlay}`;
+            window.location = url;
+        };
+
+        $scope.listMovieTheaters();
+    })
+</script>
+
+</html>

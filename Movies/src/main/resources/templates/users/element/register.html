@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" th:replace="~{/users/userIndex :: dynamic(~{:: body})}">
+
+<body>
+	<div class="col-6 mx-auto p-5 mt-5">
+		<form action="/account/save" method="post" th:object="${ac}">
+			<h2 class="col-12 mx-auto">Register</h2>
+			<div class="mb-3">
+				<label for="exampleInputEmail1" class="form-label">UserName:</label>
+				<input th:field="*{id}" type="text" class="form-control" id="exampleInputEmail1"
+					aria-describedby="emailHelp" required>
+				<i th:errors="*{id}"></i>
+				<i th:text="${acalreadyexists}" class="text-danger"></i>
+
+			</div>
+			<div class="mb-3">
+				<label for="exampleInputEmail1" class="form-label">Your
+					name:</label> <input th:field="*{name}" type="text" class="form-control" id="exampleInputEmail1"
+					aria-describedby="emailHelp" required>
+				<i th:errors="*{name}"></i>
+			</div>
+			<div class="mb-3">
+				<label for="exampleInputEmail1" class="form-label">Phone
+					number:</label> <input th:field="*{phone}" type="text" class="form-control" id="exampleInputEmail1"
+					aria-describedby="emailHelp" required>
+				<i th:errors="*{phone}"></i>
+			</div>
+			<div class="mb-3">
+				<label for="exampleInputEmail1" class="form-label">Email:</label>
+				<input th:field="*{email}" type="email" class="form-control" id="exampleInputEmail1"
+					aria-describedby="emailHelp" required>
+				<i th:errors="*{email}"></i>
+			</div>
+			<div class="mb-3">
+				<label for="exampleInputEmail1" class="form-label">Age:</label> <input th:field="*{age}" type="number"
+					class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
+				<i th:errors="*{age}"></i>
+			</div>
+			<div class="mb-3">
+				<label for="exampleInputPassword1" class="form-label">Password</label>
+				<input th:field="*{password}" type="password" class="form-control" id="exampleInputPassword1" required>
+				<i th:errors="*{password}"></i>
+			</div>
+			<button type="submit" class="btn btn-primary">Register</button>
+		</form>
+
+		<b>If you had an account, login <a th:href="@{/user/register}">here</a>. Or
+			<a th:href="@{/user/forgotpassword}">forgot password</a></b>
+	</div>
+</body>
+
+</html>

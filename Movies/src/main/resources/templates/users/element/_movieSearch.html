@@ -1,0 +1,31 @@
+<div class="panel panel-default">
+    <div class="panel-heading mt-3">
+        <div class="panel-heading">
+            <h3 class="panel-title mb-0">Tìm kiếm</h3>
+            <div class="dropdown-divider"></div>
+            <hr>
+        </div>
+    </div>
+    <div class="panel-body " th:each="movie:${movieSearch}" th:object="${movie}">
+        <a th:href="@{|/movie/detail/*{id}|}">
+            <div class="card mb-3">
+                <div class="row no-gutters">
+                    <div class="col-md-2">
+                        <img th:src="@{|*{poster}|}" alt="..." style="height: 150px">
+                    </div>
+                    <div class="col-md-10">
+                        <div class="card-body">
+                            <h5 class="card-title"
+                                style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                                [[*{name}]]
+                            </h5>
+                            <p th:text="${#strings.length(movie.description) > 300 ? movie.description.substring(0, 299) + ' ...' : movie.description}"
+                                class="card-text"></p>
+                            <p class="card-text"><small class="text-muted">[[*{releaseDay}]]</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>

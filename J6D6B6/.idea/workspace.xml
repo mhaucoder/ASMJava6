@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="d2f28b2d-0408-4a68-a30b-04a360c160b9" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../Movies/src/main/java/edu/poly/controller/admin/MoviePlayAdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Movies/src/main/java/edu/poly/controller/admin/MoviePlayAdminController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Movies/src/main/java/edu/poly/controller/admin/TheaterAdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Movies/src/main/java/edu/poly/controller/admin/TheaterAdminController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Movies/src/main/java/edu/poly/service/TheaterService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Movies/src/main/java/edu/poly/service/TheaterService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Movies/src/main/java/edu/poly/service/impl/MovieServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Movies/src/main/java/edu/poly/service/impl/MovieServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Movies/src/main/java/edu/poly/service/impl/TheaterServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Movies/src/main/java/edu/poly/service/impl/TheaterServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Movies/src/main/java/edu/poly/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Movies/src/main/java/edu/poly/service/impl/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Movies/src/main/resources/templates/admin/pages/movie.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Movies/src/main/resources/templates/admin/pages/movie.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Movies/src/main/resources/templates/admin/pages/movie_play_edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Movies/src/main/resources/templates/admin/pages/movie_play_edit.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Movies/src/main/resources/templates/admin/pages/theater_edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Movies/src/main/resources/templates/admin/pages/theater_edit.html" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="2TLWQIMetuHQYzMesDiEAgZHQJY" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "DuongVu",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d2f28b2d-0408-4a68-a30b-04a360c160b9" name="Changes" comment="" />
+      <created>1690822823780</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1690822823780</updated>
+      <workItem from="1690822824784" duration="17000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

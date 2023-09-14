@@ -1,0 +1,23 @@
+<div class="panel panel-default">
+    <div class="panel-heading mt-3">
+        <div class="panel-heading">
+            <h3 class="panel-title mb-0">Vừa cập nhật</h3>
+            <div class="dropdown-divider"></div>
+            <hr>
+        </div>
+    </div>
+    <div class="panel-body row">
+        <div class="thumbnail col-md-4 py-2" th:each="movie:${phimmoicapnhat}" th:object="${movie}">
+            <a th:href="@{|/movie/detail/*{id}|}">
+                <img th:src="@{|*{poster}|}" alt="Movie Image" style="width: 18rem;">
+            </a>
+            <div class="caption">
+                <h4 style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">[[*{name}]]</h4>
+                <p
+                    th:text="${#strings.length(movie.description) > 90 ? movie.description.substring(0, 90) + ' ...' : movie.description}">
+                </p>
+                <a th:href="@{|/movie/detail/*{id}|}" class="btn btn-primary">Watch Now</a>
+            </div>
+        </div>
+    </div>
+</div>

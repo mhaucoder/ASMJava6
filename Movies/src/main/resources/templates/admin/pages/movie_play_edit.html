@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.thymeleaf.org" th:replace="~{/admin/layouts/layout :: dynamic(~{::body})}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1 class="h3 mb-2 text-gray-800">Movie Play</h1>
+
+    <div class="card shadow mb 4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">DataTables Movie Play</h6>
+        </div>
+        <div class="card-body">
+            <form action="/movies/admin/movie-play/save" method="POST" th:object="${moviePlay}">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group mb-3">
+                            <label for="id" class="form-label">ID Movie Play</label>
+                            <input th:field="*{id}" type="number" class="form-control form-control-user"
+                                th:readonly="true" />
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group mb-3">
+                            <div class="d-flex justify-content-between">
+                                <label for="movie" class="form-label">Name Movie</label>
+                                <i th:errors="*{movie.id}" class="justify-content-end text-danger"></i>
+                            </div>
+                            <select th:field="*{movie.id}" id="movie2" class="form-control form-control-user">
+                                <option value="">--- Choose Movie ---</option>
+                                <option th:each="movie : ${movies}" th:value="${movie.id}" th:text="${movie.name}"
+                                    th:selected="${movie.id != null and
+                                    moviePlay.movie != null and
+                                    movie.id == moviePlay.movie.id}">
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group mb-3">
+                            <label for="id" class="form-label">Duration</label>
+                            <input th:field="*{movie.duration}" id="movieDuration" type="number"
+                                class="form-control form-control-user" th:readonly="true" />
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group mb-3">
+                            <label for="movie" class="form-label">Theater</label>
+                            <select th:field="*{roomMp.movietheaterRoom.id}" id="movieTheater"
+                                class="form-control form-control-user">
+                                <option value="">--- Choose Theater ---</option>
+                                <option th:each="theater : ${theaters}" th:value="${theater.id}"
+                                    th:text="${theater.name}" th:selected="${theater.id != null and
+                                    moviePlay.roomMp.movietheaterRoom != null and
+                                    theater.id == moviePlay.roomMp.movietheaterRoom.id}">
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group mb-3">
+                            <div class="d-flex justify-content-between">
+                                <label for="room" class="form-label">Room</label>
+                                <i th:errors="*{roomMp.id}" class="justify-content-end text-danger"></i>
+                            </div>
+                            <select th:field="*{roomMp.id}" id="movieRoom" class="form-control form-control-user">
+                                <option value="">--- Choose Theater First ---</option>
+                                <!-- Các option cho phòng phim sẽ được tải sau khi người dùng chọn rạp phim -->
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group mb-3">
+                            <div class="d-flex justify-content-between">
+                                <label for="fromDay" class="form-label">Start Day</label>
+                                <i th:errors="*{startDay}" class="justify-content-end text-danger"></i>
+                            </div>
+                            <input th:field="*{startDay}" type="date" class="form-control form-control-user"
+                                placeholder="Enter Date...">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group mb-3">
+                            <div class="d-flex justify-content-between">
+                                <label for="startTime" class="form-label">Start Time</label>
+                                <i th:errors="*{startTime}" class="justify-content-end text-danger"></i>
+                            </div>
+                            <input id="start-time-input" th:field="*{startTime}" type="time"
+                                class="form-control form-control-user">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group mb-3">
+                            <label for="endDay" class="form-label">End Day</label>
+                            <input th:field="*{startDay}" type="date" class="form-control form-control-user"
+                                placeholder="Enter Date..." readonly>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group mb-3">
+                            <label for="endTime" class="form-label">End Time</label>
+                            <input id="end-time-input" type="time" class="form-control form-control-user" readonly>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn btn-success btn-user">
+                    Save
+                </button>
+                <a th:href="@{|/movies/admin/movie-play/update/*{id}|}" class="btn btn-info btn-user">
+                    Update
+                </a>
+                <a th:href="@{|/movies/admin/movie-play/delete/*{id}|}" class="btn btn-danger btn-user"
+                    id="deleteButton">
+                    Delete
+                </a>
+                <a th:href="@{|/movies/admin/movie-play/edit|}" class="btn btn-secondary btn-user">
+                    Clear
+                </a>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("deleteButton").addEventListener("click", function (e) {
+            var confirmed = confirm("Are you sure you want to delete?");
+            if (!confirmed) {
+                e.preventDefault();
+            }
+        });
+    </script>
+
+    <script th:inline="javascript">
+        $(document).ready(function () {
+            const selectedRoomId = [[${ moviePlay.roomMp.id }]];
+
+            function handler() {
+                var selectedTheaterId = $("#movieTheater").val();
+
+                if (selectedTheaterId === "") {
+                    return;
+                }
+
+                // Gọi Ajax để lấy danh sách các phòng của rạp được chọn
+                $.ajax({
+                    url: "/rest/room/" + selectedTheaterId,
+                    type: "GET",
+                    dataType: "json",
+                    success: function (data) {
+                        // Xóa tất cả các option cũ trong combobox Room
+                        $("#movieRoom").empty();
+
+                        $("#movieRoom").append($('<option>', {
+                            value: "",
+                            text: "--- Choose Room ---"
+                        }));
+
+                        // Thêm option mới cho từng phòng
+                        $.each(data, function (index, room) {
+                            var option = $('<option>', {
+                                value: room.id,
+                                text: room.name
+                            });
+
+                            // Kiểm tra nếu ID của phòng bằng với ID của phòng đang được chọn
+                            // thì thêm thuộc tính 'selected'
+                            if (room.id == selectedRoomId) {
+                                option.attr("selected", "selected");
+                            }
+
+                            $("#movieRoom").append(option);
+                        });
+                    },
+                    error: function (error) {
+                        console.error("Error fetching rooms:", error);
+                    }
+                });
+            }
+
+            $("#movieTheater").change((function () {
+                handler()
+            }));
+
+            handler()
+        });
+    </script>
+
+    <script th:inline="javascript">
+        $(document).ready(function () {
+            function calculateEndTime() {
+                const startTime = $("#start-time-input").val();
+                const duration = $("#movieDuration").val();
+
+                if (!startTime || isNaN(duration)) {
+                    return;
+                }
+
+                const [startHour, startMinute] = startTime.split(":").map(Number);
+                const startTimeObj = new Date();
+                startTimeObj.setHours(startHour, startMinute, 0);
+
+                const endTimeObj = new Date(startTimeObj.getTime() + (duration * 60 * 60 * 1000));
+
+                // Format the end time to HH:mm format
+                const endHour = endTimeObj.getHours().toString().padStart(2, "0");
+                const endMinute = endTimeObj.getMinutes().toString().padStart(2, "0");
+
+                $("#end-time-input").val(`${endHour}:${endMinute}`);
+            }
+
+            $("#start-time-input").on("input", function () {
+                calculateEndTime();
+            });
+
+            $("#movie2").change(function () {
+                // Get the selected movie's ID
+                var selectedMovieId = $(this).val();
+
+                // Fetch the movie's duration using AJAX
+                $.ajax({
+                    url: "/rest/movies/" + selectedMovieId,
+                    method: "GET",
+                    dataType: "json",
+                    success: function (response) {
+                        // Assuming the API response contains the 'duration' field
+                        var duration = response.duration;
+
+                        // Update the duration input with the received duration
+                        $("#movieDuration").val(duration);
+                        calculateEndTime();
+                    },
+                    error: function () {
+                        // Handle errors if any
+                        console.log(12);
+                        $("#movieDuration").val("N/A"); // Set a default value if the duration cannot be fetched
+                    },
+                });
+            });
+
+            calculateEndTime();
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            // Event listener for the movie select element
+            $("#movie2").change(function () {
+                // Get the selected movie's ID
+                var selectedMovieId = $(this).val();
+
+                // Fetch the movie's duration using AJAX
+                $.ajax({
+                    url: "/rest/movies/" + selectedMovieId,
+                    method: "GET",
+                    dataType: "json",
+                    success: function (response) {
+                        // Assuming the API response contains the 'duration' field
+                        var duration = response.duration;
+
+                        // Update the duration input with the received duration
+                        $("#movieDuration").val(duration);
+                    },
+                    error: function () {
+                        // Handle errors if any
+                        $("#movieDuration").val("N/A"); // Set a default value if the duration cannot be fetched
+                    },
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

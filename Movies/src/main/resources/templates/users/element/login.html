@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" th:replace="~{/users/userIndex :: dynamic(~{:: body})}">
+
+
+<body>
+	<div class="col-6 mx-auto p-5 mt-5">
+		<h2 class="col-12 mx-auto">Login</h2>
+		<h3 class="badge text-bg-success" th:text="${registersuccess}"></h3>
+		<h3 class="badge text-bg-danger" th:text="${relogin}"></h3>
+		<form th:action="@{/auth/login}" method="post">
+			<div class="mb-3">
+				<label for="exampleInputEmail1" class="form-label">Username:</label>
+				<input name="username" type="text" class="form-control"
+					id="exampleInputEmail1" aria-describedby="emailHelp" required>
+			</div>
+			<div class="mb-3">
+				<label for="exampleInputPassword1" class="form-label">Password</label>
+				<input name="password" type="password" class="form-control"
+					id="exampleInputPassword1" required>
+
+			</div>
+			<div class="mb-3 form-check">
+				<input class="form-check-input m-0" type="radio" name="rememberme" id="flexRadioDefault1"> <label
+					class="form-check-label" for="flexRadioDefault1">Remember
+					me?</label>
+			</div>
+			<button type="submit" class="btn btn-primary">Login</button>
+
+		</form>
+
+		<b>If you don't have an account, register <a th:href="@{/user/register}">here</a>. Or
+			<a th:href="@{/user/forgotpassword}">forgot password</a></b>
+	</div>
+</body>
+
+</html>

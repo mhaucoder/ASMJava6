@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.thymeleaf.org" th:replace="~{/admin/layouts/layout :: dynamic(~{::body})}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1 class="h3 mb-2 text-gray-800">Movies</h1>
+
+    <div class="card shadow mb 4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">DataTables Movies</h6>
+        </div>
+        <div class="card-body">
+            <form action="/movies/admin/movies/save" method="POST" th:object="${movie}">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="mb-3">
+                            <div for="id" class="form-label">Poster</div>
+                            <div class="border border-2" style="min-height: 200px;"><img th:src="*{poster}" alt=""
+                                    style="max-height: 200px;"></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group mb-3">
+                            <div class="d-flex justify-content-between">
+                                <label for="id" class="form-label">ID Movies</label>
+                                <i th:errors="*{id}" class="justify-content-end text-danger"></i>
+                            </div>
+                            <input th:field="*{id}" type="text" class="form-control form-control-user"
+                                placeholder="Enter ID Movie..." th:readonly="${update}" />
+                        </div>
+                        <div class="form-group mb-3">
+                            <div class="d-flex justify-content-between">
+                                <label for="name" class="form-label">Name Movies</label>
+                                <i th:errors="*{name}" class="justify-content-end text-danger"></i>
+                            </div>
+                            <input th:field="*{name}" type="text" class="form-control form-control-user"
+                                placeholder="Enter Name Movie...">
+                        </div>
+                        <div class="form-group mb-3">
+                            <div class="d-flex justify-content-between">
+                                <label for="price" class="form-label">Price Movies</label>
+                                <i th:errors="*{price}" class="justify-content-end text-danger"></i>
+                            </div>
+                            <input th:field="*{price}" type="number" class="form-control form-control-user"
+                                placeholder="Enter price Movie...">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group mb-3">
+                            <div class="d-flex justify-content-between">
+                                <label for="releaseDay" class="form-label">Release Day</label>
+                                <i th:errors="*{releaseDay}" class="justify-content-end text-danger"></i>
+                            </div>
+                            <input th:field="*{releaseDay}" type="date" class="form-control form-control-user"
+                                placeholder="Enter Release Day...">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group mb-3">
+                            <div class="d-flex justify-content-between">
+                                <label for="duration" class="form-label">Duration</label>
+                                <i th:errors="*{duration}" class="justify-content-end text-danger"></i>
+                            </div>
+                            <input th:field="*{duration}" type="number" class="form-control form-control-user"
+                                placeholder="Enter Duration...">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group mb-3">
+                            <div class="d-flex justify-content-between">
+                                <label for="categorys" class="form-label">Category</label>
+                                <i th:errors="*{categorys}" class="justify-content-end text-danger"></i>
+                            </div>
+                            <input th:field="*{categorys}" type="text" class="form-control form-control-user"
+                                placeholder="Enter category...">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group mb-3">
+                            <div class="d-flex justify-content-between">
+                                <label for="actors" class="form-label">Actors</label>
+                                <i th:errors="*{actors}" class="justify-content-end text-danger"></i>
+                            </div>
+                            <input th:field="*{actors}" type="text" class="form-control form-control-user"
+                                placeholder="Enter Actors...">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mb-3">
+                    <div class="d-flex justify-content-between">
+                        <label for="poster" class="form-label">Poster Movie</label>
+                        <i th:errors="*{poster}" class="justify-content-end text-danger"></i>
+                    </div>
+                    <input th:field="*{poster}" type="text" class="form-control form-control-user"
+                        placeholder="Enter Poster Movie...">
+                </div>
+                <div class="form-group mb-3">
+                    <div class="d-flex justify-content-between">
+                        <label for="description" class="form-label">Description</label>
+                        <i th:errors="*{description}" class="justify-content-end text-danger"></i>
+                    </div>
+                    <textarea th:field="*{description}" class="form-control form-control-user" name="description"
+                        rows="10" placeholder="Enter Description..."></textarea>
+                </div>
+
+                <button class="btn btn-success btn-user">
+                    Save
+                </button>
+                <a th:href="@{|/movies/admin/movies/delete/*{id}|}" class="btn btn-danger btn-user" id="deleteButton">
+                    Delete
+                </a>
+                <a th:href="@{|/movies/admin/movies/edit|}" class="btn btn-secondary btn-user">
+                    Clear
+                </a>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("deleteButton").addEventListener("click", function (e) {
+            var confirmed = confirm("Are you sure you want to delete?");
+            if (!confirmed) {
+                e.preventDefault();
+            }
+        });
+    </script>
+</body>
+
+</html>

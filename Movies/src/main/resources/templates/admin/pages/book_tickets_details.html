@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.thymeleaf.org" th:replace="~{/admin/layouts/layout :: dynamic(~{::body})}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Books Tickets</h1>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">DataTables Booktickets</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Theater</th>
+                            <th>Room</th>
+                            <th>Movie</th>
+                            <th>Seat</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="item: ${list}" th:object="${item}">
+                            <td>[[*{id}]]</td>
+                            <td>[[*{bookticket.movieplayBook.roomMp.movietheaterRoom.name}]]</td>
+                            <td>[[*{bookticket.movieplayBook.roomMp.name}]]</td>
+                            <td>[[*{bookticket.movieplayBook.movie.name}]]</td>
+                            <td>[[*{soGhe}]]</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.thymeleaf.org" th:replace="~{/admin/layouts/layout :: dynamic(~{::body})}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Role</title>
+</head>
+
+<body>
+    <h1 class="h3 mb-2 text-gray-800">Role</h1>
+
+    <div class="card shadow mb 4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">DataTables Role</h6>
+        </div>
+        <div class="card-body">
+            <form action="/movies/admin/roles/save" method="POST" th:object="${role}">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group mb-3">
+                            <div>
+                                <div class="d-flex justify-content-between">
+                                    <label for="id" class="form-label">ID Roles</label>
+                                    <i th:errors="*{id}" class="justify-content-end text-danger"></i>
+                                </div>
+                            </div>
+                            <input th:field="*{id}" type="text" class="form-control form-control-user"
+                                placeholder="Enter ID Roles..." th:readonly="${update}" />
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group mb-3">
+
+                            <div class="d-flex justify-content-between">
+                                <label for="name" class="form-label">Roles</label>
+                                <i th:errors="*{role}" class="justify-content-end text-danger"></i>
+                            </div>
+                            <input th:field="*{role}" type="text" class="form-control form-control-user"
+                                placeholder="Enter Roles...">
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn btn-success btn-user">
+                    Save
+                </button>
+                <!-- <a th:href="@{|/movies/admin/theaters/update/*{id}|}" class="btn btn-info btn-user">
+                    Update
+                </a> -->
+                <a th:href="@{|/movies/admin/theaters/delete/*{id}|}" class="btn btn-danger btn-user" id="deleteButton">
+                    Delete
+                </a>
+                <a th:href="@{|/movies/admin/theaters/edit|}" class="btn btn-secondary btn-user">
+                    Clear
+                </a>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("deleteButton").addEventListener("click", function (e) {
+            var confirmed = confirm("Are you sure you want to delete?");
+            if (!confirmed) {
+                e.preventDefault();
+            }
+        });
+    </script>
+</body>
+
+</html>

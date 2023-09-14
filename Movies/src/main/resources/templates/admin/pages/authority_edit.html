@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.thymeleaf.org" th:replace="~{/admin/layouts/layout :: dynamic(~{::body})}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1 class="h3 mb-2 text-gray-800">Authority</h1>
+
+    <div class="card shadow mb 4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">DataTables Authority</h6>
+        </div>
+        <div class="card-body">
+            <form action="/movies/admin/authority/save" method="POST" th:object="${authority}">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group mb-3">
+                            <div class="d-flex justify-content-between">
+                                <label for="id" class="form-label">ID</label>
+                            </div>
+                            <input th:field="*{id}" type="text" class="form-control form-control-user"
+                                th:readonly="true" />
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group mb-3">
+                            <div class="d-flex justify-content-between">
+                                <label for="name" class="form-label">Fullname</label>
+                                <i th:errors="*{userAu.id}" class="justify-content-end text-danger"></i>
+                            </div>
+                            <select th:field="*{userAu.id}" class="form-control form-control-user">
+                                <option value="">--- Choose User ---</option>
+                                <option th:each="user : ${accounts}" th:value="${user.id}" th:text="${user.name}"
+                                    th:selected="${user.id != null and authority.userAu != null and user.id == authority.userAu.id}">
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group mb-3">
+                            <div class="d-flex justify-content-between">
+                                <label for="phone" class="form-label">Role</label>
+                                <i th:errors="*{role.id}" class="justify-content-end text-danger"></i>
+                            </div>
+                            <select th:field="*{role.id}" class="form-control form-control-user">
+                                <option value="">--- Choose Role ---</option>
+                                <option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.role}"
+                                    th:selected="${role.id != null and authority.role != null and role.id == authority.role.id}">
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn btn-success btn-user">
+                    Save
+                </button>
+                <a th:href="@{|/movies/admin/authority/delete/*{id}|}" class="btn btn-danger btn-user"
+                    id="deleteButton">
+                    Delete
+                </a>
+                <a th:href="@{|/movies/admin/authority/edit|}" class="btn btn-secondary btn-user">
+                    Clear
+                </a>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("deleteButton").addEventListener("click", function (e) {
+            var confirmed = confirm("Are you sure you want to delete?");
+            if (!confirmed) {
+                e.preventDefault();
+            }
+        });
+    </script>
+</body>
+
+</html>

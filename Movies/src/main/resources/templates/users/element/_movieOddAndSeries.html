@@ -1,0 +1,62 @@
+<div class="panel panel-default row">
+    <div class="panel panel-default col-6">
+        <div class="panel-heading mt-3">
+            <div class="panel-heading">
+                <h3 class="panel-title mb-0">Phim lẻ</h3>
+                <div class="dropdown-divider"></div>
+                <hr>
+            </div>
+        </div>
+        <div class="panel-body" th:each="movie:${phimbovale}" th:object="${movie}">
+            <a th:href="@{|/movie/detail/*{id}|}">
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row no-gutters">
+                        <div class="col-md-5">
+                            <img th:src="@{|*{poster}|}" alt="..." class="h-100">
+                        </div>
+                        <div class="col-md-7">
+                            <div class="card-body">
+                                <h5 class="card-title"
+                                    style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">[[*{name}]]
+                                </h5>
+                                <p th:text="${#strings.length(movie.description) > 120 ? movie.description.substring(0, 120) + ' ...' : movie.description}"
+                                    class="card-text"></p>
+                                <p class="card-text"><small class="text-muted">Last updated</small></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="panel panel-default col-6">
+        <div class="panel-heading mt-3">
+            <div class="panel-heading">
+                <h3 class="panel-title mb-0">Phim bộ</h3>
+                <div class="dropdown-divider"></div>
+                <hr>
+            </div>
+        </div>
+        <div class="panel-body" th:each="movie:${phimbovale}" th:object="${movie}">
+            <a th:href="@{|/movie/detail/*{id}|}">
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row no-gutters">
+                        <div class="col-md-5">
+                            <img th:src="@{|*{poster}|}" alt="..." class="h-100">
+                        </div>
+                        <div class="col-md-7">
+                            <div class="card-body">
+                                <h5 class="card-title"
+                                    style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">[[*{name}]]
+                                </h5>
+                                <p th:text="${#strings.length(movie.description) > 120 ? movie.description.substring(0, 120) + ' ...' : movie.description}"
+                                    class="card-text"></p>
+                                <p class="card-text"><small class="text-muted">Last updated</small></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>

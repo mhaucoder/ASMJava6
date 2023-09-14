@@ -1,0 +1,25 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title mb-0">Sắp chiếu</h3>
+        <div class="dropdown-divider"></div>
+        <hr>
+    </div>
+    <div class="panel-body row">
+        <div id="carouselExampleControls" class="carousel slide d-block w-100 m-3" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item" th:each="movie, iterStat : ${phimsapchieu}" th:object="${movie}"
+                    th:classappend="${iterStat.first} ? 'active' : ''" style="height: 18rem;">
+                    <img th:src="@{|*{poster}|}" alt="Movie Image" class="d-block row w-100 m-0">
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                <i class="tim-icons icon-minimal-left"></i>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                <i class="tim-icons icon-minimal-right"></i>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+</div>
